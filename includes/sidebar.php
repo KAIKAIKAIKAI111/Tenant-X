@@ -86,6 +86,13 @@
             </span>
           </a>
         </li>
+        <li class="<?php if($page=='billing-calculator') { echo 'active'; }?>">
+          <a href="billing-calculator.php">
+            <i class="fa fa-file-pdf-o"></i> <span>Billing Calculator</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
 
       </ul>
     </section>

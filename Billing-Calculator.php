@@ -1,11 +1,13 @@
 <?php
-    session_start();
-    error_reporting(0);
-    include('includes/dbconn.php');
-    error_reporting(0);
-    if (strlen($_SESSION['avmsaid']==0)) {
-        header('location:logout.php');
-    } else { 
+  session_start();
+  error_reporting(0);
+  include('includes/dbconn.php');
+
+  if (strlen($_SESSION['avmsaid']==0)) {
+    header('location:logout.php');
+    } else {
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -14,15 +16,23 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Tenant X: Rental Property Management</title>
+  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="dist/css/styles.css">
 
+  <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -30,109 +40,87 @@
 
     <?php include 'includes/header.php'?>
   
-    <?php $page='dashboard'; include 'includes/sidebar.php'?>
+    <?php $page='billing-calculator'; include 'includes/sidebar.php'?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper dashboard-bg-image">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
+        Billing Calculator
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li class="active">Billing Calculator</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-primary">
-            <div class="inner">
-              <h3><?php include 'counters/total-visitor-count.php'?></h3>
 
-              <p>Total Aparment Tenants</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-ios-people"></i>
-            </div>
-            <a href="visitor-mgmt.php" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3><?php include 'counters/todays-visitor-count.php'?></h3>
-
-              <p>Today's Visitors</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-android-contacts"></i>
-            </div>
-            <a href="visitor-mgmt.php" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?php include 'counters/occ-apartment.php'?></h3>
-
-              <p>Occupied Apartments</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="manage-apartment.php" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3><?php include 'counters/av-apartment.php'?></h3>
-
-              <p>Available Apartments</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-home"></i>
-            </div>
-            <a href="manage-apartment.php" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-purple">
-            <div class="inner">
-              <h3 style="color: transparent">0</h3>
-
-              <p>Billing Calculator</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-home"></i>
-            </div>
-            <a href="billing-calculator.php" class="small-box-footer">More Info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- /.row -->
-
+        <?php if($msg){ echo "<div class='alert alert-success alert-dismissible'>
+                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                    <h4><i class='icon fa fa-info-circle'></i> Alert!</h4>
+                    $msg
+        </div>";}  ?>
+     
       
-	  
-      <!-- Main row -->
-      
-      <!-- / Main row -->
+
+            
+            
+            <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title">Please select starting and ending date</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          
+
+            <div class="box-body">
+              <div class="row">
+                <form name="reports" method="POST" action="view-report.php"  enctype="multipart/form-data">
+                      
+                <div id="billing-popup" onclick="closeCalculator()">
+                  <div class="billing-content" onclick="event.stopPropagation();">
+                      <h2>Billing System</h2>
+                      <form id="billing-form">
+                          <div>
+                            <label for="current-reading">Current Reading (CR):</label>
+                            <input type="number" id="current-reading" required>
+                          </div>
+
+                          <div>
+                            <label for="previous-reading">Previous Reading (PR):</label>
+                            <input type="number" id="previous-reading" required>
+                          </div>
+
+                          <div>
+                            <label for="kilowatts">Kilowatts per Hour (kWh):</label>
+                            <input type="number" id="kilowatts" required>
+                          </div>
+
+                          <button type="button" onclick="calculateBilling()">Calculate</button>
+                      </form>
+
+                      <div id="billing-results">
+                          <!-- Results will be displayed here -->
+                      </div>
+                  </div>
+              </div>
+                  
+                 
+				  
+				  </form>
+                </div>
+                
+                
+                
+            
+          </div> <!-- /row -->
 
     </section>
     <!-- /.content -->
@@ -166,12 +154,12 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <!-- Morris.js charts -->
 <script src="bower_components/raphael/raphael.min.js"></script>
 <script src="bower_components/morris.js/morris.min.js"></script>
@@ -193,13 +181,14 @@
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
+
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="dist/js/script.js"></script>
+
 </body>
 </html>
-
-<?php } ?>
